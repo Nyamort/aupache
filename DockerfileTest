@@ -1,0 +1,4 @@
+FROM php:8.2-apache
+
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
