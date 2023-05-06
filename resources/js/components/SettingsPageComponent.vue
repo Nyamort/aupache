@@ -62,9 +62,9 @@ export default {
         loadExtensions() {
             if(this.versionSelected == null) return;
             axios.get("/api/php/"+this.versionSelected+"/extensions").then(response => {
-                this.extensions = response.data;
-                this.extensionsSelected = response.data;
-                this.defaultExtensions = response.data;
+                this.extensions = response.data.downloadable;
+                this.extensionsSelected = response.data.installed;
+                this.defaultExtensions = response.data.installed;
             });
         },
         savePhpExtensions() {
