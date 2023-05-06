@@ -32,24 +32,24 @@ class PHPService
         return $output;
     }
 
-    public function installVersion(string $version): void
+    public function installVersion(string $version): string|bool
     {
-        exec("apt install -y php$version");
+        return exec("apt install -y php$version");
     }
 
-    public function installExtension(string $version, string $extension): void
+    public function installExtension(string $version, string $extension): string|bool
     {
-        exec("apt install -y php$version-$extension");
+        return exec("apt install -y php$version-$extension");
     }
 
-    public function uninstallVersion(string $version): void
+    public function uninstallVersion(string $version): string|bool
     {
-        exec("apt remove -y php$version");
+        return exec("apt remove -y php$version");
     }
 
-    public function uninstallExtension(string $version, string $extension): void
+    public function uninstallExtension(string $version, string $extension): string|bool
     {
-        exec("apt remove -y php$version-$extension");
+        return exec("apt remove -y php$version-$extension");
     }
 
     public function uninstallVersionAndExtensions(string $version): void
