@@ -68,9 +68,8 @@ export default {
             });
         },
         savePhpExtensions() {
-            let extensionsSelected = this.extensionssSelected.value;
-            let installed = extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
-            let uninstalled = this.defaultExtensions.filter(extension => !extensionsSelected.includes(extension));
+            let installed = this.extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
+            let uninstalled = this.defaultExtensions.filter(extension => !this.extensionsSelected.includes(extension));
 
             installed.forEach(extension => {
                 axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/install").then(response => {
