@@ -29,8 +29,8 @@ export default {
     },
     methods: {
         savePhpVersions() {
-            let installed = this.versionsSelected.filter(version => this.defaultVersions.includes(version));
-            let uninstalled = this.versionsSelected.filter(version => !this.defaultVersions.includes(version));
+            let installed = this.versionsSelected.filter(version => !this.defaultVersions.includes(version));
+            let uninstalled = this.defaultVersions.filter(version => !this.versionsSelected.includes(version));
 
             installed.forEach(version => {
                 axios.post("/api/php/"+version+"/install").then(response => {
