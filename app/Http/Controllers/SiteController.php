@@ -32,7 +32,7 @@ class SiteController extends Controller
             return [
                 'name' => $folder,
                 'url' => $hasVhost ? $vhost->server_name : null,
-                'hasVHost' => $hasVhost,
+                'actif' => $hasVhost,
                 'php' => $this->vHostService->getPhpVersion($vhost),
             ];
         }, $folders);
