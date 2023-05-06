@@ -57,7 +57,7 @@ class PHPService
 
     public function uninstallExtension(string $version, string $extension): void
     {
-        $this->commandService->run("apt remove -y php$version-$extension");
+        $this->commandService->run("apt remove -y php$version-$extension; dpkg --configure -a");
     }
 
     public function uninstallVersionAndExtensions(string $version): void
