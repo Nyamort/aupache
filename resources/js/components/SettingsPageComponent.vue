@@ -20,6 +20,7 @@
 
 <script>
 import axios from "axios";
+import {ref} from "vue";
 
 export default {
     name: "Settings",
@@ -30,7 +31,7 @@ export default {
             defaultVersions: [],
             versionSelected: null,
             extensions: [],
-            extensionssSelected: [],
+            extensionssSelected: ref(),
             defaultExtensions: [],
 
         };
@@ -68,21 +69,21 @@ export default {
             });
         },
         savePhpExtensions() {
-            console.log(this.extensionsSelected);
-            // let installed = this.extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
-            // let uninstalled = this.defaultExtensions.filter(extension => !this.extensionsSelected.includes(extension));
-            //
-            // installed.forEach(extension => {
-            //     axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/install").then(response => {
-            //         console.log(response.data);
-            //     });
-            // });
-            //
-            // uninstalled.forEach(extension => {
-            //     axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/uninstall").then(response => {
-            //         console.log(response.data);
-            //     });
-            // });
+            let extensionsSelected = this.extensionssSelected.value;
+            let installed = extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
+            let uninstalled = this.defaultExtensions.filter(extension => !extensionsSelected.includes(extension));
+
+            installed.forEach(extension => {
+                axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/install").then(response => {
+                    console.log(response.data);
+                });
+            });
+
+            uninstalled.forEach(extension => {
+                axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/uninstall").then(response => {
+                    console.log(response.data);
+                });
+            });
         }
     }
 }
