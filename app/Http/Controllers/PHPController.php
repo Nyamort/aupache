@@ -22,6 +22,7 @@ class PHPController extends Controller
 
     public function extensions(string $version)
     {
+        $version = str_replace('php', '', $version);
         return response()->json([
             'installed' => $this->phpService->listExtensionsInstalled($version),
             'downloadable' => $this->phpService->listExtensionsDownloadable($version),
