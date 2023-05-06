@@ -1,9 +1,19 @@
 <template>
-    <div>
+    <div class="content">
         <h3>PHP</h3>
-        <div>
+        <div class="phpList">
             <multi-select display="chip" v-model="versionsSelected" :options="versions" :maxSelectedLabels="3"></multi-select>
             <Button label="Enregistrer" icon="pi pi-save" class="p-button-secondary" @click="savePhpVersions" />
+        </div>
+        <div class="extensions">
+            <dropdown @change="loadExtensions" v-model="versionSelected" :options="versionsSelected"></dropdown>
+            <div class="extensionsList">
+                <div v-for="extension in extensions" :key="extension">
+                    <Checkbox v-model="extensionssSelected" :value="extension" :inputId="extension" :binary="true"></Checkbox>
+                    <label :for="extension">{{ extension }}</label>
+                </div>
+            </div>
+            <Button label="Enregistrer" icon="pi pi-save" class="p-button-secondary" @click="savePhpExtensions" />
         </div>
     </div>
 </template>
@@ -17,7 +27,12 @@ export default {
         return {
             versions: [],
             versionsSelected: [],
-            defaultVersions: []
+            defaultVersions: [],
+            versionSelected: null,
+            extensions: [],
+            extensionssSelected: [],
+            defaultExtensions: [],
+
         };
     },
     mounted() {
@@ -43,11 +58,60 @@ export default {
                     console.log(response.data);
                 });
             });
+        },
+        loadExtensions() {
+            if(this.versionSelected == null) return;
+            axios.get("/api/php/"+this.versionSelected+"/extensions").then(response => {
+                this.extensions = response.data;
+                this.extensionsSelected = response.data;
+                this.defaultExtensions = response.data;
+            });
+        },
+        savePhpExtensions() {
+            let installed = this.extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
+            let uninstalled = this.defaultExtensions.filter(extension => !this.extensionsSelected.includes(extension));
+
+            installed.forEach(extension => {
+                axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/install").then(response => {
+                    console.log(response.data);
+                });
+            });
+
+            uninstalled.forEach(extension => {
+                axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/uninstall").then(response => {
+                    console.log(response.data);
+                });
+            });
         }
     }
 }
 </script>
 
 <style scoped>
+    .phpList{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
 
+    .extensions{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
+    }
+
+    .extensionsList{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 15px;
+    }
 </style>

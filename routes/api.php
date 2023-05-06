@@ -23,3 +23,4 @@ Route::get('/php/{version}/extensions', [PHPController::class, 'extensions']);
 Route::post('/php/{version}/install', [PHPController::class, 'installVersion']);
 Route::post('/php/{version}/uninstall', [PHPController::class, 'uninstallVersion']);
 Route::post('/php/{version}/extensions/{extension}/install', [PHPController::class, 'installExtension']);
+Route::post('/php/{version}/extensions/{extension}/uninstall', [PHPController::class, 'uninstallExtension']);

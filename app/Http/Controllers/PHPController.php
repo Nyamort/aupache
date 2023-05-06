@@ -48,4 +48,11 @@ class PHPController extends Controller
         $this->phpService->installExtension($version, $extension);
         return response()->json();
     }
+
+    public function uninstallExtension(string $version, string $extension)
+    {
+        $version = str_replace('php', '', $version);
+        $this->phpService->uninstallExtension($version, $extension);
+        return response()->json();
+    }
 }
