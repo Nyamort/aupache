@@ -27,8 +27,6 @@ class CommandService
             // Il est important que vous fermiez les pipes avant d'appeler
             // proc_close afin d'éviter un verrouillage.
             $return_value = proc_close($process);
-
-            echo "La commande a retourné $return_value\n";
         }
     }
 }
