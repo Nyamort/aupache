@@ -4,6 +4,14 @@ namespace App\Services;
 
 class PHPService
 {
+
+
+    public function __construct(
+        private readonly CommandService $commandService,
+    )
+    {
+    }
+
     public function listVersionsDownloadable(): array
     {
         $output = [];
@@ -32,24 +40,24 @@ class PHPService
         return $output;
     }
 
-    public function installVersion(string $version): string|bool
+    public function installVersion(string $version): void
     {
-        return exec("apt install -y php$version");
+        $this->commandService->run("apt install -y php$version");
     }
 
-    public function installExtension(string $version, string $extension): string|bool
+    public function installExtension(string $version, string $extension): void
     {
-        return exec("apt install -y php$version-$extension");
+        $this->commandService->run("apt install -y php$version-$extension");
     }
 
-    public function uninstallVersion(string $version): string|bool
+    public function uninstallVersion(string $version): void
     {
-        return exec("apt remove -y php$version");
+        $this->commandService->run("apt remove -y php$version");
     }
 
-    public function uninstallExtension(string $version, string $extension): string|bool
+    public function uninstallExtension(string $version, string $extension): void
     {
-        return exec("apt remove -y php$version-$extension");
+        $this->commandService->run("apt remove -y php$version-$extension");
     }
 
     public function uninstallVersionAndExtensions(string $version): void
