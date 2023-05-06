@@ -22,7 +22,6 @@ class CommandService
             fwrite($pipes[0], '<?php print_r($_ENV); ?>');
             fclose($pipes[0]);
 
-            echo stream_get_contents($pipes[1]);
             fclose($pipes[1]);
 
             // Il est important que vous fermiez les pipes avant d'appeler
