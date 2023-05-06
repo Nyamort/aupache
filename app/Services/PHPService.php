@@ -29,14 +29,14 @@ class PHPService
     public function listExtensionsInstalled(string $version): array
     {
         $output = [];
-        exec("apt list --installed | grep '^php$version-' | awk -F '/' '{print $1}' | awk -F '-' '{print $2}' | sort -V", $output);
+        exec("apt list --installed | grep '^php$version-' | awk -F '/' '{print $1}' | awk -F '-' '{print $2}' | sort -V | uniq", $output);
         return $output;
     }
 
     public function listExtensionsDownloadable(string $version): array
     {
         $output = [];
-        exec("apt-cache search --names-only '^php$version-' | awk '{print $1}' | awk -F '-' '{print $2}' | sort -V", $output);
+        exec("apt-cache search --names-only '^php$version-' | awk '{print $1}' | awk -F '-' '{print $2}' | sort -V | uniq", $output);
         return $output;
     }
 
