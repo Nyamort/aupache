@@ -30,18 +30,21 @@ class PHPController extends Controller
 
     public function installVersion(string $version)
     {
+        $version = str_replace('php', '', $version);
         $this->phpService->installVersion($version);
         return response()->json();
     }
 
     public function uninstallVersion(string $version)
     {
+        $version = str_replace('php', '', $version);
         $this->phpService->uninstallVersionAndExtensions($version);
         return response()->json();
     }
 
     public function installExtension(string $version, string $extension)
     {
+        $version = str_replace('php', '', $version);
         $this->phpService->installExtension($version, $extension);
         return response()->json();
     }
