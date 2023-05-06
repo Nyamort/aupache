@@ -68,20 +68,21 @@ export default {
             });
         },
         savePhpExtensions() {
-            let installed = this.extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
-            let uninstalled = this.defaultExtensions.filter(extension => !this.extensionsSelected.includes(extension));
-
-            installed.forEach(extension => {
-                axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/install").then(response => {
-                    console.log(response.data);
-                });
-            });
-
-            uninstalled.forEach(extension => {
-                axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/uninstall").then(response => {
-                    console.log(response.data);
-                });
-            });
+            console.log(this.extensionsSelected);
+            // let installed = this.extensionsSelected.filter(extension => !this.defaultExtensions.includes(extension));
+            // let uninstalled = this.defaultExtensions.filter(extension => !this.extensionsSelected.includes(extension));
+            //
+            // installed.forEach(extension => {
+            //     axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/install").then(response => {
+            //         console.log(response.data);
+            //     });
+            // });
+            //
+            // uninstalled.forEach(extension => {
+            //     axios.post("/api/php/"+this.versionSelected+"/extensions/"+extension+"/uninstall").then(response => {
+            //         console.log(response.data);
+            //     });
+            // });
         }
     }
 }
