@@ -9,7 +9,7 @@
             <dropdown @change="loadExtensions" v-model="versionSelected" :options="versionsSelected"></dropdown>
             <div class="extensionsList">
                 <div v-for="extension in extensions" :key="extension">
-                    <Checkbox v-model="extensionssSelected" :value="extension" :inputId="extension" :binary="true"></Checkbox>
+                    <Checkbox v-model="extensionssSelected" :value="extension" :inputId="extension"></Checkbox>
                     <label :for="extension">{{ extension }}</label>
                 </div>
             </div>
@@ -20,7 +20,6 @@
 
 <script>
 import axios from "axios";
-import {ref} from "vue";
 
 export default {
     name: "Settings",
@@ -31,7 +30,7 @@ export default {
             defaultVersions: [],
             versionSelected: null,
             extensions: [],
-            extensionssSelected: ref(),
+            extensionssSelected: [],
             defaultExtensions: [],
 
         };
