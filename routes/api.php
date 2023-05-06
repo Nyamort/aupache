@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EnvController;
+use App\Http\Controllers\PHPController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/envs', [EnvController::class, 'index']);
 Route::get('/envs/{env}/sites/', [SiteController::class, 'index']);
 Route::patch('/envs/{env}/sites/{site}', [SiteController::class, 'patchPhpVersion']);
+Route::get('/php', [PHPController::class, 'index']);
+Route::get('/php/{version}/extensions', [PHPController::class, 'extensions']);
+Route::post('/php/{version}/install', [PHPController::class, 'installVersion']);
+Route::post('/php/{version}/uninstall', [PHPController::class, 'uninstallVersion']);
+Route::post('/php/{version}/extensions/{extension}/install', [PHPController::class, 'installExtension']);

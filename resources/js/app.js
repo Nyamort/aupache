@@ -113,14 +113,29 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
+import {createRouter, createWebHistory} from "vue-router";
+import SettingsComponent from "./components/SettingsPageComponent.vue";
+import SitesPageComponent from "./components/SitesPageComponent.vue";
 
 
 const app = createApp(BaseComponent);
+
+const routes = [
+    { path: '/', component: SitesPageComponent},
+    { path: '/settings', component: SettingsComponent},
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})
 
 app.use(PrimeVue, { ripple: true });
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(DialogService);
+app.use(router);
+
 
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);

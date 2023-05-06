@@ -16,6 +16,11 @@
                 <Tag :value="slotProps.data.php " :severity="'info'" />
             </template>
         </Column>
+        <Column field="settings" header="Paramètres">
+            <template #body="slotProps">
+                <Button icon="pi pi-cog" class="p-button-secondary" />
+            </template>
+        </Column>
     </DataTable>
 
 </template>
