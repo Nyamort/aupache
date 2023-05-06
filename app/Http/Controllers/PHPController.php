@@ -33,27 +33,27 @@ class PHPController extends Controller
     {
         $version = str_replace('php', '', $version);
         $this->phpService->installVersion($version);
-        return response();
+        return response('', 201);
     }
 
     public function uninstallVersion(string $version)
     {
         $version = str_replace('php', '', $version);
         $this->phpService->uninstallVersionAndExtensions($version);
-        return response();
+        return response('', 204);
     }
 
     public function installExtension(string $version, string $extension)
     {
         $version = str_replace('php', '', $version);
         $this->phpService->installExtension($version, $extension);
-        return response();
+        return response('', 201);
     }
 
     public function uninstallExtension(string $version, string $extension)
     {
         $version = str_replace('php', '', $version);
         $this->phpService->uninstallExtension($version, $extension);
-        return response();
+        return response('', 204);
     }
 }
