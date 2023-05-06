@@ -6,10 +6,11 @@ class CommandService
 {
     public function run(string $command): void
     {
+        // recreted file
         $descriptorspec = array(
             0 => array("pipe", "r"),  // // stdin est un pipe où le processus va lire
             1 => array("pipe", "w"),  // stdout est un pipe où le processus va écrire
-            2 => array("file", base_path() . "/storage/logs/command.log", "a") // stderr est un fichier
+            2 => array("file", base_path() . "/storage/logs/command.log", "w") // stderr est un fichier
         );
         $process = proc_open("echo 'www-data' | /usr/bin/sudo -S $command", $descriptorspec, $pipes);
 
