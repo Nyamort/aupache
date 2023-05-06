@@ -32,7 +32,7 @@ class VHost extends Model
 
     public function getServerNameAttribute(): string
     {
-        return Str::of("https://")
+        return Str::of("http://")
             ->append($this->name)
             ->append('.')
             ->append($this->environment)
