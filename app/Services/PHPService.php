@@ -43,16 +43,19 @@ class PHPService
     public function installVersion(string $version): void
     {
         $this->commandService->run("apt install -y php$version");
+        $this->commandService->run("dpkg --configure -a");
     }
 
     public function installExtension(string $version, string $extension): void
     {
         $this->commandService->run("apt install -y php$version-$extension");
+        $this->commandService->run("dpkg --configure -a");
     }
 
     public function uninstallVersion(string $version): void
     {
         $this->commandService->run("apt remove -y php$version");
+        $this->commandService->run("dpkg --configure -a");
     }
 
     public function uninstallExtension(string $version, string $extension): void
